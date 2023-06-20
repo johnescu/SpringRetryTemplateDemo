@@ -1,8 +1,8 @@
 package com.eduard.spring1;
 
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +18,10 @@ public class MyTestController {
 	public ResponseEntity<String> testEndpoint() {
 		errorCounterSimulator.incrementAndGet();
 		if (errorCounterSimulator.get() <= maxNumberOfFailures.get()) {
-			throw new RuntimeException("error counter is " + errorCounterSimulator);
+			return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
 		}
 		return ResponseEntity.ok("Test OK");
+		//return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).build();
 	}
 
 	@PostMapping("/reset/{maxFailures}")

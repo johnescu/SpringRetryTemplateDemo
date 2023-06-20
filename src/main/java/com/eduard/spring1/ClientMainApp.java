@@ -15,7 +15,7 @@ public class ClientMainApp {
 		MyRestClient myRestClient = context.getBean(MyRestClient.class);
 
 		 myRestClient.initializeTestErrorSimulator("4"); //Server status is OK
-		//myRestClient.initializeTestErrorSimulator("5"); //Server status is KO
+		 //myRestClient.initializeTestErrorSimulator("5"); //Server status is KO
 
 		boolean status = myRestClient.makeApiCall();
 
